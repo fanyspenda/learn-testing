@@ -1,0 +1,11 @@
+.submit-button.ant-btn {
+	border: 2px solid #0da500;
+	color: #0da500;
+	background-color: white;
+}
+
+.submit-button.ant-btn:hover {
+	border: 2px solid #0da500;
+	color: white;
+	background-color: #0da500;
+}
