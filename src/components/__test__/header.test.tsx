@@ -1,37 +1,34 @@
-import React from "react";
-import { rest } from "msw";
-import { setupServer } from "msw/node";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom/extend-expect";
+import { headerTestId } from "../data-testid";
 
 import Header from "../header/Header";
+
+const { title, todoInput, todoSubmit } = headerTestId;
 
 beforeEach(() => {
 	render(<Header />);
 });
 
-test("Show header with correct text", async () => {
-	expect(screen.getByTestId("title")).toHaveTextContent(/^Simple Todo List$/);
+test("Header show correct text", async () => {
+	expect(screen.getByTestId(title)).toHaveTextContent(/^Simple Todo List$/);
 });
 
-test("input is empty at beginning", async () => {
-	expect(screen.getByTestId("todo-input")).toHaveValue("");
+test("Header input is empty at beginning", async () => {
+	expect(screen.getByTestId(todoInput)).toHaveValue("");
 });
 
-test("Button submit has correct text", async () => {
-	expect(screen.getByTestId("todo-submit")).toHaveTextContent(/^Tambah$/);
+test("Header button submit has correct text", async () => {
+	expect(screen.getByTestId(todoSubmit)).toHaveTextContent(/^Tambah$/);
 });
 
-test("Button submit has correct style", async () => {
-	expect(screen.getByTestId("todo-submit")).toHaveClass("submit-button");
+test("Header button submit has correct classname", async () => {
+	expect(screen.getByTestId(todoSubmit)).toHaveClass("submit-button");
 });
 
-test("Clear input after submit", async () => {
-	fireEvent.change(screen.getByTestId("todo-input"), {
-		target: {
-			value: "Todo 1",
-		},
-	});
-	fireEvent.click(screen.getByTestId("todo-submit"));
-	expect(screen.getByTestId("todo-input")).toHaveValue("");
+test("Header clear input after submit", async () => {
+	userEvent.type(screen.getByTestId(todoInput), "Todo 1");
+	await waitFor(() => userEvent.click(screen.getByTestId(todoSubmit)));
+	expect(screen.getByTestId(todoInput)).toHaveValue("");
 });
