@@ -11,7 +11,7 @@ beforeEach(() => {
 	render(<Header />);
 });
 
-test("Header show correct text", async () => {
+test("Header show correct texts", async () => {
 	expect(screen.getByTestId(title)).toHaveTextContent(/^Simple Todo List$/);
 });
 

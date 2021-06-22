@@ -17,13 +17,13 @@ test("Card show Todo button group", async () => {
 	expect(screen.getByTestId(deleteButton)).toBeTruthy();
 });
 
-test("Card show Doing button group", async () => {
+test("Card show Doing button Group", async () => {
 	render(<Card todoId="1" status="doing" title="Learn" />);
 	expect(screen.getByTestId(todoButton)).toBeTruthy();
 	expect(screen.getByTestId(doneButton)).toBeTruthy();
 });
 
-test("Card show Done button group", async () => {
+test("Card show Done button Group", async () => {
 	render(<Card todoId="1" status="done" title="Learn" />);
 	expect(screen.getByTestId(doingButton)).toBeTruthy();
 	expect(screen.getByTestId(deleteButton)).toBeTruthy();
